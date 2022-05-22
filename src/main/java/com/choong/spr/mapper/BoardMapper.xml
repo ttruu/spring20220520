@@ -4,12 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.choong.spr.mapper.BoardMapper">
 
-	<select id="selectBoardAll" resultType="com.choong.spr.domain.BoardDto">
+	<!-- 검색 쿼리 -->
+	<!-- 중복제거로 필요없어짐 -->
+	<!--<select id="searchBoardByKeword" resultType="com.choong.spr.domain.BoardDto">
 		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+		WHERE title LIKE #{keyword}
 		GROUP BY b.id
 		ORDER BY b.id DESC
 	</select>
+	-->
+
+	<select id="selectBoardAll" resultType="com.choong.spr.domain.BoardDto">
+		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply
+		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+		<!-- 쿼리 중복 제거 -->
+		<!-- 사실 if를 안넣어줘도 되는데 %%가 두개만 남으면 다 검색되니까 넣어봄 -->
+		<if test="keyword != '%%'">
+			<choose>
+				<when test="type == 'all'">
+					WHERE b.title LIKE #{keyword} OR
+						  b.body LIKE #{keyword}
+				</when>
+				<when test="type == 'title'">
+					WHERE b.title LIKE #{keyword}
+				</when>
+				<when test="type == 'body'">
+					WHERE b.body LIKE #{keyword}
+				</when>	
+			</choose>
+		</if>
+		GROUP BY b.id
+		ORDER BY b.id DESC
+	</select>
+	
 	
 	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		INSERT INTO Board (title, body)
@@ -34,4 +62,6 @@
 		DELETE FROM Board
 		WHERE id = #{id }
 	</delete>
+	
+	
 </mapper>
