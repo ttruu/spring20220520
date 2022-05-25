@@ -14,12 +14,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.choong.spr.domain.ReplyDto;
 import com.choong.spr.service.ReplyService;
 
-@Controller
+@RestController
 @RequestMapping("reply")
 public class ReplyController {
 
@@ -27,7 +28,6 @@ public class ReplyController {
 	private ReplyService service;
 
 	@PostMapping(path="insert", produces="text/plain;charset=UTF-8")
-	@ResponseBody
 	public ResponseEntity<String> insert(ReplyDto dto) {
 
 		boolean success = service.insertReply(dto);
@@ -41,7 +41,6 @@ public class ReplyController {
 	}
 
 	@PutMapping(path = "modify", produces="text/plain;charset=UTF-8")
-	@ResponseBody
 	public ResponseEntity<String> modify(@RequestBody ReplyDto dto) {
 		//System.out.println(dto);
 		boolean success = service.updateReply(dto);
@@ -54,7 +53,6 @@ public class ReplyController {
 	}
 	
 	@DeleteMapping(path = "delete/{id}", produces="text/plain;charset=UTF-8")
-	@ResponseBody
 	public ResponseEntity<String> delete(@PathVariable("id")int id) {
 		boolean success = service.deleteReply(id);
 		
@@ -67,7 +65,6 @@ public class ReplyController {
 	}
 	
 	@GetMapping("list")
-	@ResponseBody
 	public List<ReplyDto> list(int boardId) {
 		
 		return service.getReplyByBoardId(boardId);
