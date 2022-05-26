@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -98,5 +99,21 @@ public class MemberController {
 			rttr.addFlashAttribute("id", dto.getId());
 			return "redirect:/member/get";
 		}
+	}
+	
+	@PostMapping("modify")
+	public String modifyMember(MemberDto dto, String oldPassword, RedirectAttributes rttr) {
+		boolean success = service.modifyMember(dto, oldPassword);
+		
+		if (success) {
+			rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "회원 정보 수정 중 문제가 발생되었습니다.");
+		}
+		rttr.addFlashAttribute("member", dto); // model object
+		rttr.addAttribute("id", dto.getId()); // query string
+		
+		return "redirect:/member/get";
+		
 	}
 }

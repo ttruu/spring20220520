@@ -97,6 +97,7 @@
 			
 			$(this).attr("disabled", "");
 			const data = {
+					
 				nickName : $("#form1").find("[name=nickName]").val()
 			};
 			nickNameOk = false;
@@ -184,8 +185,7 @@
 
 					NICKNAME :
 					<input type="text" name="nickName" />
-					<button id="checkNickNameButton1" type="button">NICKNAME
-						중복확인</button>
+					<button id="checkNickNameButton1" type="button">NICKNAME 중복확인</button>
 					<p id="nickNameMessage1"></p>
 					<br />
 
