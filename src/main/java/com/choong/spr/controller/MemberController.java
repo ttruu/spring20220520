@@ -43,6 +43,7 @@ public class MemberController {
 		}
 	}
 	
+	
 	@GetMapping(path="check", params="id")
 	@ResponseBody
 	public String idCheck(String id) {
