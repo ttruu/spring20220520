@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -238,10 +239,20 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h1>글 본문 
-					<button id="edit-button1" class="btn btn-secondary">
-						<i class="fa-solid fa-pen-to-square"></i>
-					</button>
+				<h1>글 본문
+					
+					<sec:authorize access="isAuthenticated()">
+						<sec:authentication property="principal" var="principal"/>
+						<!-- 
+						로그인한 사람 : ${principal.username}
+						작성한 사람 : ${board.memberId} 
+						--> 
+						<c:if test="${principal.username == board.memberId }">
+							<button id="edit-button1" class="btn btn-secondary">
+								<i class="fa-solid fa-pen-to-square"></i>
+							</button>
+						</c:if>
+					</sec:authorize>
 				</h1>
 				
 				<c:if test="${not empty message }">
@@ -266,9 +277,14 @@
 					</div>
 					
 					<div>
+						<label for="input3" class="form-label">작성자</label>
+						<input class="form-control" type="text" value="${board.writerNickName }" readonly/>
+					</div> 
+
+					<div>
 						<label for="input2" class="form-label">작성일시</label>
 						<input class="form-control" type="datetime-local" value="${board.inserted }" readonly/>
-					</div> 
+					</div>
 					
 					<button id="modify-submit1" class="btn btn-primary d-none">수정</button>
 					<button id="delete-submit1" class="btn btn-danger d-none">삭제</button>

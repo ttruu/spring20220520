@@ -16,8 +16,9 @@
 	-->
 
 	<select id="selectBoardAll" resultType="com.choong.spr.domain.BoardDto">
-		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply
+		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply, m.nickName writerNickName
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+						  JOIN Member m ON b.memberId = m.id
 		<!-- 쿼리 중복 제거 -->
 		<!-- 사실 if를 안넣어줘도 되는데 %%가 두개만 남으면 다 검색되니까 넣어봄 -->
 		<if test="keyword != '%%'">
@@ -40,13 +41,14 @@
 	
 	
 	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-		INSERT INTO Board (title, body)
-		VALUES (#{title}, #{body})
+		INSERT INTO Board (title, body, memberId)
+		VALUES (#{title}, #{body}, #{memberId})
 	</insert>
 	
 	<select id="selectBoardById" resultType="com.choong.spr.domain.BoardDto">
-		SELECT b.id, b.title, b.body, b.inserted, COUNT(r.id) numOfReply
+		SELECT b.id, b.title, b.body, b.inserted, COUNT(r.id) numOfReply, m.id memberId, m.nickName writerNickName
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+						  JOIN Member m ON b.memberId = m.id
 		WHERE b.id = #{id}
 	</select>
 	
