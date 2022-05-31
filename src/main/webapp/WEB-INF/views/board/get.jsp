@@ -299,6 +299,11 @@
 					</div>
 					
 					<div>
+						<!-- 파일 데스크탑에 저장하기 -->
+						<img src="file:///C:/imgtmp/board/${board.id }/${board.fileName }" alt="" />
+					</div>
+					
+					<div>
 						<label for="input3" class="form-label">작성자</label>
 						<input class="form-control" type="text" value="${board.writerNickName }" readonly/>
 					</div> 

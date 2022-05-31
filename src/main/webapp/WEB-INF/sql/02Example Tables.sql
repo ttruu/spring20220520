@@ -62,4 +62,13 @@ WHERE id = '';
            if(m.id = 'user', 'true', 'false') own
 	FROM Reply r JOIN Member m	ON r.memberId = m.id
 	WHERE r.board_id = 26
-	ORDER BY r.id
+	ORDER BY r.id;
+    
+DESC Reply;
+
+
+SELECT * FROM Member ORDER BY inserted DESC;
+
+-- 어드민 계정에 새로 권한 주는 법
+DESC Auth;
+INSERT INTO Auth (memberId, role) VALUES ('admin2', 'ROLE_ADMIN');

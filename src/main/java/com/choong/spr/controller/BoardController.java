@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.choong.spr.domain.BoardDto;
@@ -49,14 +50,22 @@ public class BoardController {
 	}
 	
 	@PostMapping("insert")
-	public String insert(BoardDto board, Principal principal, RedirectAttributes rttr) {
+	public String insert(BoardDto board, 
+			MultipartFile file, 
+			Principal principal, 
+			RedirectAttributes rttr) {
 		
-		System.out.println(principal);
-		System.out.println(principal.getName()); // username
+		//System.out.println(file);
+		//System.out.println(file.getOriginalFilename());
+		//System.out.println(file.getSize());
 		
+		//System.out.println(principal);
+		//System.out.println(principal.getName()); // username
+		if(file.getSize() > 0 ) {
+			board.setFileName(file.getOriginalFilename());			
+		}
 		board.setMemberId(principal.getName());
-		
-		boolean success = service.insertBoard(board);
+		boolean success = service.insertBoard(board, file);
 		
 		if (success) {
 			rttr.addFlashAttribute("message", "새 글이 등록되었습니다.");
@@ -72,6 +81,7 @@ public class BoardController {
 		BoardDto dto = service.getBoardById(id);
 		List<ReplyDto> replyList = replyService.getReplyByBoardId(id);
 		model.addAttribute("board", dto);
+		
 		
 		/* 댓글 ajax로 가져오기 */
 		/*model.addAttribute("replyList", replyList);*/
