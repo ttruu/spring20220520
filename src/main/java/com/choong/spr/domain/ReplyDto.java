@@ -10,6 +10,9 @@ public class ReplyDto {
 	private int boardId;
 	private String content;
 	private LocalDateTime inserted;
+	private String memberId;
+	private String writerNickName;
+	private boolean own;
 
 	public String getPrettyInserted() {
 		// 24시간 이내면 시간만

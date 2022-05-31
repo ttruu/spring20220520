@@ -122,4 +122,7 @@ public class MemberController {
 	public void loginPage() {
 		
 	}
+	
+	
+	
 }

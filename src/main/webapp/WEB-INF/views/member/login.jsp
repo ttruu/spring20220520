@@ -12,16 +12,34 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 <title>Insert title here</title>
+
+  
 </head>
-<body>
+<body class="text-center">
+<main class="form-signin">
 	<my:navBar current="login"></my:navBar>
 	
-	<h1>로그인</h1>
-	<form action="${appRoot }/login" method="post">
-		아이디 : <input type="text" name="username"  /> <br /> 
-		비밀번호 : <input type="password" name="password" /> <br />
-		<input type="checkbox" name="remember-me"  /> 자동로그인 <br />
-		<input type="submit" value="로그인" />
+	<h1 class="h3 mb-3 fw-normal">로그인</h1>
+	
+	<form action="${appRoot }/login" method="post" class="row g-3">
+	
+	 <div class="form-floating">
+	 	<input type="text" name="username"  class="form-control" />
+	 	<label for="floatingInput">아이디</label>
+    </div>
+    <div class="form-floating">
+	 	<input type="password" name="password" class="form-control" />
+	 	<label for="floatingPassword">비밀번호</label>
+	</div>
+	<div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> 자동로그인
+      </label>
+    </div>	
+	
+	<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+		
 	</form>
+</main>
 </body>
 </html>

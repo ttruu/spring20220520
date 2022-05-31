@@ -35,4 +35,31 @@ ADD COLUMN memberId VARCHAR(20) NOT NULL DEFAULT 'user' REFERENCES Member(id) AF
 ALTER TABLE Board
 MODIFY COLUMN memberId VARCHAR(20) NOT NULL;
 
+
+
 SELECT * FROM Board;
+
+DESC Reply;
+
+-- reply에 memberId 컬럼 추가 (member테이블 id컬럼 참조키 제약사항, not null 제약사항 추가)
+ALTER TABLE Reply
+ADD COLUMN memberId VARCHAR(20) NOT NULL DEFAULT 'user' REFERENCES Member(id) AFTER content;
+
+ALTER TABLE Reply
+MODIFY COLUMN memberId VARCHAR(20) NOT NULL;
+
+SELECT * FROM Reply ORDER BY 1 desc;
+
+UPDATE Member
+SET nickName = '유저'
+WHERE id = '';
+
+	SELECT r.id, 
+	       r.board_id boardId,
+	       r.content,
+	       m.nickName writerNickName,
+	       r.inserted,
+           if(m.id = 'user', 'true', 'false') own
+	FROM Reply r JOIN Member m	ON r.memberId = m.id
+	WHERE r.board_id = 26
+	ORDER BY r.id
