@@ -52,6 +52,12 @@
 					<a href="${signupUrl }" class="nav-link${current == 'signup' ? 'active' : '' }">회원가입</a>
 				</li>
 				
+				<sec:authorize access="isAuthenticated()">
+					<li class="nav-item">
+						<a href="${memberInfoUrl }" class="nav-link${current == 'memberInfo' ? 'active' : '' }">회원정보</a>
+					</li>
+				</sec:authorize>
+				
 				<sec:authorize access="hasRole('ADMIN')">
 				<!-- li.nav-item>a.nav-link{회원목록} -->
 				<li class="nav-item">

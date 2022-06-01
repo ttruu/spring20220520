@@ -187,7 +187,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<my:navBar></my:navBar>
+	<my:navBar current="memberInfo"></my:navBar>
 
 	<!-- .container>.row>.col>h1{회원정보} -->
 	<div class="container">
