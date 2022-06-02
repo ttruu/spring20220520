@@ -298,10 +298,12 @@
 							cols="30" rows="10" readonly>${board.body }</textarea>
 					</div>
 					
-					<div>
-						<!-- 파일 데스크탑에 저장하기 -->
-						<img src="file:///C:/imgtmp/board/${board.id }/${board.fileName }" alt="" />
-					</div>
+					<c:forEach items="${board.fileName }" var="file">
+						<div>
+							<!-- 파일 aws 저장하기 -->
+							<img src="${imageUrl }/board/${board.id }/${file }" alt="" />
+						</div>
+					</c:forEach>
 					
 					<div>
 						<label for="input3" class="form-label">작성자</label>

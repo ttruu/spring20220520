@@ -158,6 +158,7 @@
 </head>
 <body>
 <my:navBar current="signup"></my:navBar>
+
 	<div class="container">
 		<div class="row">
 			<div class="col">
