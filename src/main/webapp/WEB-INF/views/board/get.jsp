@@ -26,6 +26,8 @@
 			$("#textarea1").removeAttr("readonly");
 			$("#modify-submit1").removeClass("d-none");
 			$("#delete-submit1").removeClass("d-none");
+			$("#addFileInputContainer1").removeClass("d-none");
+			$(".removeFileCheckbox").removeClass("d-none");
 		});
 		
 		$("#delete-submit1").click(function(e) {
@@ -283,7 +285,7 @@
 					</div>
 				</c:if>
 				
-				<form id="form1" action="${appRoot }/board/modify" method="post">
+				<form id="form1" action="${appRoot }/board/modify" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }"/>
 					
 					<div>
@@ -299,11 +301,32 @@
 					</div>
 					
 					<c:forEach items="${board.fileName }" var="file">
-						<div>
-							<!-- 파일 aws 저장하기 -->
-							<img src="${imageUrl }/board/${board.id }/${file }" alt="" />
+						<%
+						String file = (String) pageContext.getAttribute("file");
+						String encodedFileName = java.net.URLEncoder.encode(file, "utf-8");
+						pageContext.setAttribute("encodedFileName", encodedFileName);
+						%>
+						<div class="row">
+							<div class="col-1">
+							<!-- 삭제 체크박스 -->
+								<div class="d-none removeFileCheckbox">
+									<i class="fa-solid fa-trash-can"></i>삭제 <br />
+									<input type="checkbox" name="removeFileList" value="${file }"/>									
+								</div>
+							</div>
+							<div class="col-11">
+								<div>
+									<!-- 파일 aws 저장하기 -->
+									<img class="img-fluid" src="${imageUrl }/board/${board.id }/${encodedFileName}" alt="" />
+								</div>
+							</div>
 						</div>
 					</c:forEach>
+					
+					<div id="addFileInputContainer1" class="d-none">
+						파일추가 :
+						<input type="file" accept="image/*" multiple="multiple" name="addFileList" id="" />
+					</div>
 					
 					<div>
 						<label for="input3" class="form-label">작성자</label>

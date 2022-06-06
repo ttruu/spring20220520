@@ -49,7 +49,12 @@
 									<a href="${getUrl }">
 										<c:out value="${board.title }" />
 									</a>
-									
+									<!-- 게시글에 그림이 있는지 없는지 표시 -->
+									<c:if test="${board.hasFile }">
+										<span class="badge rounded-pill bg-light text-dark">
+											<span class="fa-solid fa-file"></span>
+										</span>
+									</c:if>
 									<c:if test="${board.numOfReply > 0 }">
 										<span class="badge rounded-pill bg-light text-dark">
 											<i class="fa-solid fa-comment-dots"></i>

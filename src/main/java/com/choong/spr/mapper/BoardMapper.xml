@@ -16,9 +16,15 @@
 	-->
 
 	<select id="selectBoardAll" resultType="com.choong.spr.domain.BoardDto">
-		SELECT b.id, b.title, b.inserted, COUNT(r.id) numOfReply, m.nickName writerNickName
+		SELECT b.id, 
+			   b.title, 
+			   b.inserted, 
+			   COUNT(DISTINCT r.id) numOfReply, 
+			   m.nickName writerNickName,
+			   COUNT(f.id) hasFile
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
 						  JOIN Member m ON b.memberId = m.id
+					 LEFT JOIN File f ON b.id = f.boardId	  
 		<!-- 쿼리 중복 제거 -->
 		<!-- 사실 if를 안넣어줘도 되는데 %%가 두개만 남으면 다 검색되니까 넣어봄 -->
 		<if test="keyword != '%%'">
@@ -103,4 +109,9 @@
 		FROM File
 		WHERE boardId = #{boardId}
 	</select>
+	
+	<delete id="deleteFileByBoardIdAndFileName">
+		DELETE FROM File
+		WHERE boardId = #{boardId} AND fileName = #{fileName}
+	</delete>
 </mapper>

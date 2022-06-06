@@ -30,6 +30,9 @@ public interface BoardMapper {
 
 	List<String> selectFileNameByBoard(int boardId);
 
+	void deleteFileByBoardIdAndFileName(@Param("boardId") int id, 
+			@Param("fileName") String fileName);
+
 	/*List<BoardDto> searchBoardByKeword(String keyword);*/
 
 }
