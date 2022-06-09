@@ -36,10 +36,14 @@
 				<h1>로그인</h1>
 
 				<form action="${appRoot }/login" method="post">
-					<label for="usernameInput1" id="form-label"> 아이디 </label>
-					<input type="text" name="username" class="form-control" />
-					<label for="passwordInput1" id="form-label"> 패스워드 </label>
-					<input type="password" name="password" class="form-control" />
+					<label for="usernameInput1" id="form-label"> 
+					아이디 
+					</label>
+					<input id="usernameInput1" type="text" name="username" class="form-control" /> <br />
+					<label for="passwordInput1" id="form-label"> 
+					패스워드 
+					</label>
+					<input type="password" name="password" class="form-control" /> <br />
 					<div class="checkbox mb-3">
 					<label>
 						<input type="checkbox" value="remember-me">	자동로그인
