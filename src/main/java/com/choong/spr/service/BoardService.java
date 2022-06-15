@@ -142,7 +142,6 @@ public class BoardService {
 				deleteFromAwsS3(dto.getId(), fileName);
 				mapper.deleteFileByBoardIdAndFileName(dto.getId(), fileName);
 			}
-			
 		}
 		
 		if(addFileList != null) {
