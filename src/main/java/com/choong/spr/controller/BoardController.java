@@ -172,6 +172,7 @@ public class BoardController {
 	
 	
 	// 썸머노트 에디터에서 받는 이미지 업로드 처리
+	/* 
 	@RequestMapping(value = "/imageupload", method = RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	@ResponseBody
 	public String imageUpload(MultipartHttpServletRequest request) throws IOException {
@@ -197,6 +198,7 @@ public class BoardController {
 		return "http://" + localIP + ":" + request.getServerPort() + filename;
 		
 	}
+	 */
 }
 
 

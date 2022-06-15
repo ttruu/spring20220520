@@ -13,20 +13,8 @@
 <title>Insert title here</title>
 
 
-<!-- 폰트크기/설정 -->
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-<link
-	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-	
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js" integrity="sha512-6F1RVfnxCprKJmfulcxxym1Dar5FsT/V2jiEUvABiaEiFWoQ8yHvqRM/Slf0qJKiwin6IDQucjXuolCfCKnaJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 <body>
@@ -54,8 +42,7 @@
 						<input multiple="multiple" type="file" name="file" accept="image/*"/>
 					</div>
 					
-					<button type="submit" class="btn btn-default">Submit</button>
-						<button id="addFile"  type="button" class="btn btn-default">파일 폼 추가</button>
+					<!-- <button id="addFile"  type="button" class="btn btn-default">파일 폼 추가</button> -->
 					
 					<button type="submit" class="btn btn-primary">작성</button>
 				</form>
