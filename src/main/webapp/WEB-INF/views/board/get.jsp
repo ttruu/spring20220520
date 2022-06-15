@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" integrity="sha512-ngQ4IGzHQ3s/Hh8kMyG4FC74wzitukRMIcTOoKT3EyzFZCILOPF0twiXOQn75eDINUfKBYmzYn2AA8DkAk8veQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js" integrity="sha512-6F1RVfnxCprKJmfulcxxym1Dar5FsT/V2jiEUvABiaEiFWoQ8yHvqRM/Slf0qJKiwin6IDQucjXuolCfCKnaJQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script src="/static/vendor/summernote/dist/summernote.min.js"></script>
 
 <script>
 	$(document).ready(function() {
@@ -260,42 +261,6 @@
 	});
 </script>
 
-<script>
-$(document).ready(function() {
-	var toolbar = [
-		    // 글꼴 설정
-		    ['fontname', ['fontname']],
-		    // 글자 크기 설정
-		    ['fontsize', ['fontsize']],
-		    // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
-		    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-		    // 글자색
-		    ['color', ['forecolor','color']],
-		    // 표만들기
-		    ['table', ['table']],
-		    // 글머리 기호, 번호매기기, 문단정렬
-		    ['para', ['ul', 'ol', 'paragraph']],
-		    // 줄간격
-		    ['height', ['height']],
-		    // 그림첨부, 링크만들기, 동영상첨부
-		    ['insert',['picture','link','video']],
-		    // 코드보기, 확대해서보기, 도움말
-		    ['view', ['codeview','fullscreen', 'help']]
-		  ];
-	var setting = {
-            height : 300,
-            minHeight : null,
-            maxHeight : null,
-            focus : true,
-            lang : 'ko-KR',
-            toolbar : toolbar
-         };
-        $('#summernote').summernote(setting);
-        
-        
- });
-  
-</script>
 
 <title>Insert title here</title>
 </head>
@@ -338,8 +303,8 @@ $(document).ready(function() {
 
 					<div>
 						<label class="form-label" for="textarea1">본문</label>
-						<textarea class="form-control" name="body" id="summernote"
-							cols="30" rows="10" readonly>${board.body }</textarea>
+						<div class="form-control" name="body" id="summernote"
+							cols="30" rows="10" readonly>${board.body }</div>
 					</div>
 					
 					<c:forEach items="${board.fileName }" var="file">
