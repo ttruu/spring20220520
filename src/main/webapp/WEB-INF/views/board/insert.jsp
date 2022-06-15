@@ -11,6 +11,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <title>Insert title here</title>
+
+
+<!-- 폰트크기/설정 -->
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+	
+
+
 </head>
 <body>
 	<my:navBar current="insert"></my:navBar>
@@ -29,7 +46,7 @@
 					
 					<div>
 						<label class="form-label" for="textarea1">본문</label>
-						<textarea class="form-control" name="body" id="textarea1" cols="30" rows="10"></textarea>
+						<textarea class="form-control" name="body" id="summernote" cols="30" rows="10"></textarea>
 					</div>
 					<div>					
 						파일
@@ -37,12 +54,52 @@
 						<input multiple="multiple" type="file" name="file" accept="image/*"/>
 					</div>
 					
-					<button class="btn btn-primary">작성</button>
+					<button type="submit" class="btn btn-default">Submit</button>
+						<button id="addFile"  type="button" class="btn btn-default">파일 폼 추가</button>
+					
+					<button type="submit" class="btn btn-primary">작성</button>
 				</form>
 			</div>
 		</div>
 	</div>
 </body>
+
+<script src="/static/vendor/summernote/dist/summernote.min.js"></script>
+<script>
+	$(document).ready(function() {
+		
+		$('#summernote').summernote({
+			height : 300,
+			onImageUpload : function(files, editor, welEditable) {
+				console.log(files);
+				console.log( files[0] );
+				data = new FormData();
+				data.append("file", files[0]);
+				var $note = $(this);
+				$.ajax({
+					data : data,
+					type : "POST",
+					url : '/board/imageupload',
+					cache : false,
+					contentType : false,
+					processData : false,
+					success : function(url) {
+						alert(url);
+						$note.summernote('insertImage', url);
+					}
+				});
+			}
+		});
+		
+	/* 	$('#addFile').click(function(){
+			var fileIndex = $('.fileDiv').length;
+			$('#fileTable').append("<input type=\"file\" name=\"files["+fileIndex+"] class=\"fileDiv\">");
+		});
+ */
+	});
+</script>
+
+
 </html>
 
 
